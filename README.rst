@@ -10,7 +10,7 @@ Dependencies
 
 This stub depends on
 
-1. `Sphinx <https://pypi.GAMS.org/pypi/Sphinx>`_
+1. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
 
 Making a New Project
 --------------------
