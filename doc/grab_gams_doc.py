@@ -29,13 +29,10 @@ def read_docs(lines):
     ret = []
     on = False
     for line in lines:
-        if line.startswith('***'):
+        if line.lstrip().startswith('***'):
             on = not on
         elif on:
-            if line.startswith('*'): 
-                base = line[2:]
-            else:
-                base = line[0:]
+            base = "*".join(line.split('*')[1:])[1:]
             base = base.rstrip() # get rid of windows carriage return
             ret.append('{}\n'.format(base))
     return ret
@@ -69,15 +66,32 @@ def main():
         else:
             print('No docs found, moving on')
     print('Finished Generating GAMS documentation')
-            
+
+def test():
+    """Full unit tests are a bit much for the nonce.."""    
+    lines = [
+        ' ** foo bar\n', 
+        '  ***\n',
+        '   * bz baz2\n',
+        '   * bz * baz2\n',
+        '   *** bz baz3\n',
+        "***fig newton",
+    ]
+
+    obs = read_docs(lines)
+    exp =  [
+        'bz baz2\n',
+        'bz * baz2\n',
+    ]     
+
+    try:
+        assert(obs == exp)
+    except AssertionError:
+        print('Assert failed')
+        print(exp)
+        print(obs)
+       
 if __name__ == "__main__":
+    #test()
     main()
     
-    ## for previous testing
-    # print(read_docs([
-    #     ' ** foo bar\n', 
-    #     '   *** bz baz1\n',
-    #     '   * bz baz2\n',
-    #     '   * bz * baz2\n',
-    #     '   *** bz baz3\n',
-    #     "***fig newton"]))
