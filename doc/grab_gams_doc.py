@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
+"""Read all gams files in ../model and generate a mirrored tree of rst
+documentation files in ./source. All lines between triple-star comments (***)
+are extracted.
+"""
+
 import errno
-import os
-import shutil
 import fnmatch
+import os
 
 def files(match='*.gms', ext='rst'):
     """return all input files in ../model matching `match` and their associated
@@ -47,9 +51,6 @@ def mkdir(d):
                 raise
 
 def main():
-    """writes all documentation files from gams files in a mirrored directory
-    structure in ./doc
-    """
     print('Generating GAMS documentation')
     ins, outs = files()
     for inf, outf in zip(ins, outs):
@@ -75,7 +76,7 @@ def test():
         '   * bz baz2\n',
         '   * bz * baz2\n',
         '   *** bz baz3\n',
-        "***fig newton",
+        "***fig newton\n",
     ]
 
     obs = read_docs(lines)
@@ -92,6 +93,6 @@ def test():
         print(obs)
        
 if __name__ == "__main__":
-    #test()
+    test()
     main()
     
