@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
+"""Read all gams files in ../model and generate a mirrored tree of rst
+documentation files in ./source. All lines between triple-star comments (***)
+are extracted.
+"""
+
 import errno
-import os
-import shutil
 import fnmatch
+import os
 
 def files(match='*.gms', ext='rst'):
     """return all input files in ../model matching `match` and their associated
@@ -29,13 +33,10 @@ def read_docs(lines):
     ret = []
     on = False
     for line in lines:
-        if line.startswith('***'):
+        if line.lstrip().startswith('***'):
             on = not on
         elif on:
-            if line.startswith('*'): 
-                base = line[2:]
-            else:
-                base = line[0:]
+            base = "*".join(line.split('*')[1:])[1:]
             base = base.rstrip() # get rid of windows carriage return
             ret.append('{}\n'.format(base))
     return ret
@@ -50,9 +51,6 @@ def mkdir(d):
                 raise
 
 def main():
-    """writes all documentation files from gams files in a mirrored directory
-    structure in ./doc
-    """
     print('Generating GAMS documentation')
     ins, outs = files()
     for inf, outf in zip(ins, outs):
@@ -69,15 +67,32 @@ def main():
         else:
             print('No docs found, moving on')
     print('Finished Generating GAMS documentation')
-            
+
+def test():
+    """Full unit tests are a bit much for the nonce.."""    
+    lines = [
+        ' ** foo bar\n', 
+        '  ***\n',
+        '   * bz baz2\n',
+        '   * bz * baz2\n',
+        '   *** bz baz3\n',
+        "***fig newton\n",
+    ]
+
+    obs = read_docs(lines)
+    exp =  [
+        'bz baz2\n',
+        'bz * baz2\n',
+    ]     
+
+    try:
+        assert(obs == exp)
+    except AssertionError:
+        print('Assert failed')
+        print(exp)
+        print(obs)
+       
 if __name__ == "__main__":
+    test()
     main()
     
-    ## for previous testing
-    # print(read_docs([
-    #     ' ** foo bar\n', 
-    #     '   *** bz baz1\n',
-    #     '   * bz baz2\n',
-    #     '   * bz * baz2\n',
-    #     '   *** bz baz3\n',
-    #     "***fig newton"]))
