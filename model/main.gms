@@ -11,6 +11,9 @@ $TITLE New project based on the stub GAMS project at <https://github.com/iiasa/g
 * The string ``***`` marks the start and end of a comment section for the make command.
 * The string ``*`` at the beginning of a line in the comment section is ignored.
 *
+* You can update the copyright in the footer by editing the `conf.py` file in 
+* `doc/source` (look for the lines that have `__author__` and replace them with 
+* your preferred listing.
 ***
 
 * set # as end-of-line comment; all text after # is ignored
