@@ -34,6 +34,8 @@ def read_docs(lines):
     on = False
     for line in lines:
         if line.lstrip().startswith('***'):
+            if on: # just finished a block, add a new line
+                ret.append('\n')
             on = not on
         elif on:
             base = "*".join(line.split('*')[1:])[1:]
@@ -83,6 +85,7 @@ def test():
     exp =  [
         'bz baz2\n',
         'bz * baz2\n',
+        '\n',
     ]     
 
     try:
