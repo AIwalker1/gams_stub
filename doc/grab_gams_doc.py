@@ -29,10 +29,13 @@ def read_docs(lines):
     ret = []
     on = False
     for line in lines:
-        if line.strip().startswith('***'):
+        if line.startswith('***'):
             on = not on
         elif on:
-            base = "".join(line.split('*')[1:])[1:]
+            if line.startswith('*'): 
+                base = line[2:]
+            else:
+                base = line[0:]
             base = base.rstrip() # get rid of windows carriage return
             ret.append('{}\n'.format(base))
     return ret
