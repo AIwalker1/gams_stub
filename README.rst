@@ -3,7 +3,7 @@ A GAMS Project Stub
 
 This is a stub for a new `GAMS <http://gams.com/>`_ project. It contains the following features:
 
-1. Automatic documentation from reStructuredText comments in the GAMS file(s)
+1. Automatic documentation from reStructuredText and :math:`\LaTeX` comments in the GAMS file(s)
 2. Writing comments to the GAMS log file during a GAMS run
 3. Auxiliary function to write the computation time (since start of the GAMS run) to the log file
 
@@ -12,7 +12,8 @@ Dependencies
 
 This stub depends on
 
-1. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
+1. `Python <https://www.python.org/>`_
+2. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
 
 Making a New Project
 --------------------
@@ -49,5 +50,8 @@ You can then view the docs at http://localhost:8000/build/html/
 
 On Windows
 ~~~~~~~~~~
+
+For Windows users, `Anaconda <https://www.continuum.io/downloads>`_ is
+a good way to get started with Python, and Sphynx is already included.
 
 Follow the above instructions replacing ``make`` with ``./make.bat``.
