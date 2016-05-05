@@ -1,5 +1,4 @@
 * elegant reporting of GAMS computing time
-* requires aux_computation_time_init.gms
 
 if ( timeElapsed > 7200 ,
 	put_utility 'log' / '    Time since GAMS start: ' floor( timeElapsed / 3600 ):0:0 ' hours, ' ( mod( timeElapsed, 3600 ) / 60 ):0:0 ' minutes' ;
