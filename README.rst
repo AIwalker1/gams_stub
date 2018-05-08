@@ -52,6 +52,6 @@ On Windows
 ~~~~~~~~~~
 
 For Windows users, `Anaconda <https://www.continuum.io/downloads>`_ is
-a good way to get started with Python, and Sphynx is already included.
+a good way to get started with Python, and Sphinx is already included.
 
 Follow the above instructions replacing ``make`` with ``./make.bat``.
