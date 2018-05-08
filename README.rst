@@ -46,7 +46,7 @@ You can serve the documentation locally via::
 
     make serve
 	
-You can then view the docs at http://localhost:8000/build/html/
+You can then view the docs at http://localhost:8000
 
 On Windows
 ~~~~~~~~~~
